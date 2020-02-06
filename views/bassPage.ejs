@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bass Shop</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<!-- Navbar, su Bootstrap-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark-blue ">
+	<div class="container">
+		<a class="navbar-brand" href="#">
+			<img src="logo.png" style="max-width: 40px; max-height: 40px;">
+			Bass Shop
+			</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" >
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav ml-auto">
+			    <li class="nav-item active">
+			    	<a class="nav-link" href="/bass">Add Bass</a>
+			     </li>
+			     <li class="nav-item active">
+			    	<a class="nav-link" href="/user">Add User</a>
+			     </li>
+			     <li class="nav-item active">
+			    	<a class="nav-link" href="/queries">Queries</a>
+			     </li>
+			     <li class="nav-item active">
+			    	<a class="nav-link" href="/guitar_shop">Guitar</a>
+			     </li>
+			</ul>
+		</div>
+	</div>
+</nav>
+	<div class="container">
+		<div class="row">
+			<% basses.forEach(function(bass){ %>
+				<div class="post col-lg-3 col-md-6 col-sm-6 col-12">
+					<img src="<%= bass.img %>" class="post-pic">
+					<h3><strong><%= bass.brand + " " + bass.model %></strong></h3>
+				</div>
+				<div id="guitarModal" class="modal">
+				  <div class="modal-content">
+				    <h5>Series: <%= bass.series%></h5>
+					    <h5>Color: <%= bass.color%></h5>
+					    <h5>Strings: <%= bass.stringCount%></h5>
+					    <h5>Fingerboard wood: <%= bass.woods.fingerboard%></h5>
+					    <h5>Body wood: <%= bass.woods.body%></h5>
+					    <% if (bass.owner == ""){ %>
+					    <div class="form-container">
+					    	<h4 style="margin-top: 15%;">Add this bass to a user's bass collection</h4>
+						    <form action="/addtocollection" class="guitar-collection" style="margin-left: 15%;" method="POST">
+						    	<input type="text" class="form-control" name="username" placeholder="Username"/>
+						    	<input type="password" class="form-control" name="password" placeholder="Password"/>
+						    	<input type="hidden" name="guitar" value ="<%= bass.id%>"/>
+						    	<button class="btn btn-md btn-secondary btn-block" type="submit">Add To User's Collection</button>
+						    </form>
+					    </div> 
+					    <% } else {%>
+					    	<h5>Owner: <%= bass.owner%></h5>
+					    <%} %>
+				  </div>
+				</div>
+			<% }); %>
+		</div>
+	</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script type="text/javascript" src="script.js"></script>
+
+</html>
