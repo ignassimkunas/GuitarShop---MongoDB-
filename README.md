@@ -8,6 +8,6 @@ A project for learning and trying out MongoDB.
 
 - Sample queries at /queries 
 
-- Requires node installed. (``npm install node``).
+- Requires node installed. 
 
 - Start script - ``npm start``.
